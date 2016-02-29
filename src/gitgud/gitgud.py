@@ -15,49 +15,46 @@ class git(object):
     def fig(text):
         fig = pyfiglet.Figlet()
         return fig.renderText(text)
+
+    @staticmethod
+    def print_text(command, format_str, default_qual = ""):
+        args = git.parse_args(command)
+        name = args.name or "You"
+        sup = args.super
+        if sup:
+            qual = "super "
+        else:
+            if default_qual:
+                qual = default_qual
+            else:
+                qual = ""
+
+        text = format_str.format(name=name,
+                                 qual=qual)
+        if sup:
+            text = git.fig(text)
+        print(text)
     
     @staticmethod
     def gud():
-        args = git.parse_args("good")
-        name = args.name or "You"
-        sup = args.super
-        text = "{name} {verb} now {qual} gud!".format(name=name,
-                                                      verb="is" if args.name else "are",
-                                                      qual="super" if sup else "so")
-        if sup:
-            text = git.fig(text)
-        print(text)
+        args = git.parse_args("gud")
+        format_str = "{{name}} {verb} now {{qual}}gud!".format(verb="is" if args.name else "are")
+        git.print_text(command="gud",
+                       format_str=format_str,
+                       default_qual="so ")
 
     @staticmethod
     def rekt():
-        args = git.parse_args("rekt")
-        name = args.name or "You"
-        sup = args.super
-        text = "{name} got {qual}#rekt!".format(name=name,
-                                                qual="super " if sup else "")
-        if sup:
-            text = git.fig(text)
-        print(text)
+        git.print_text(command="rekt",
+                       format_str="{name} got {qual}#rekt!")
 
     @staticmethod
     def spooked():
-        args = git.parse_args("spooked")
-        name = args.name or "You"
-        sup = args.super
-        text = "{name} got spooked by a scary skeleton!".format(name=name)
-
-        if sup:
-            text = git.fig(text)
-        print(text)
+        git.print_text(command="spooked",
+                       format_str="{name} got spooked by a scary skeleton!")
 
     @staticmethod
     def job():
-        args = git.parse_args("job")
-        name = args.name or "You"
-        sup = args.super
-        text = "{name} got a job in gitting #rekt!".format(name=name)
-        
-        if sup:
-            text = git.fig(text)
-        print(text)
+        git.print_text(command="job",
+                       format_str="{name} got a job in gitting #rekt!")
                                                             
