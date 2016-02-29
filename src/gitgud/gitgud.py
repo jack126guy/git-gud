@@ -51,10 +51,10 @@ class git(object):
     @staticmethod
     def spooked():
         git.print_text(command="spooked",
-                       format_str="{name} got spooked by a scary skeleton!")
+                       format_str="{name} got spooked by a {qual}scary skeleton!")
 
     @staticmethod
     def job():
         git.print_text(command="job",
-                       format_str="{name} got a job in gitting #rekt!")
+                       format_str="{name} got a job in gitting {qual}#rekt!")
                                                             
