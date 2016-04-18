@@ -15,6 +15,25 @@ class git(object):
     def fig(text):
         fig = pyfiglet.Figlet()
         return fig.renderText(text)
+
+    @staticmethod
+    def print_text(command, format_str, default_qual = ""):
+        args = git.parse_args(command)
+        name = args.name or "You"
+        sup = args.super
+        if sup:
+            qual = "super "
+        else:
+            if default_qual:
+                qual = default_qual
+            else:
+                qual = ""
+
+        text = format_str.format(name=name,
+                                 qual=qual)
+        if sup:
+            text = git.fig(text)
+        print(text)
     
     @staticmethod
     def gud():
